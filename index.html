@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Sergiu-Andrei Borca · Software developer</title>
+    <meta
+      name="description"
+      content="Sergiu-Andrei Borca builds software and ships it as products: Solo Ship Kit, the Direction Flutter app, and Java and FPGA projects. CS student at UTCN, Cluj-Napoca."
+    />
+    <meta name="author" content="Sergiu-Andrei Borca" />
+    <link rel="canonical" href="https://sergiuborca.dev/" />
+    <meta name="theme-color" content="#0f1317" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- The two fonts the first screen is set in. -->
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sergiu-Andrei Borca" />
+    <meta property="og:title" content="Sergiu-Andrei Borca · I build software and ship it as products" />
+    <meta
+      property="og:description"
+      content="Solo Ship Kit, the Direction Flutter app, and Java and FPGA projects, each with its real numbers."
+    />
+    <meta property="og:url" content="https://sergiuborca.dev/" />
+    <meta property="og:image" content="https://sergiuborca.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Sergiu-Andrei Borca: I build software and ship it as products."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sergiu-Andrei Borca · I build software and ship it as products" />
+    <meta
+      name="twitter:description"
+      content="Solo Ship Kit, the Direction Flutter app, and Java and FPGA projects, each with its real numbers."
+    />
+    <meta name="twitter:image" content="https://sergiuborca.dev/og.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sergiu-Andrei Borca",
+        "url": "https://sergiuborca.dev/",
+        "jobTitle": "Software developer",
+        "email": "mailto:sergiuborca30b@gmail.com",
+        "affiliation": {
+          "@type": "CollegeOrUniversity",
+          "name": "Technical University of Cluj-Napoca"
+        },
+        "sameAs": [
+          "https://github.com/Sergiu-ABC",
+          "https://www.linkedin.com/in/sergiu-borca-519220315/"
+        ]
+      }
+    </script>
+
+    <!-- Set the theme before the first paint: dark unless the visitor chose light. -->
+    <script>
+      (function () {
+        var theme = 'dark';
+        try {
+          if (localStorage.getItem('theme') === 'light') theme = 'light';
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'light') {
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#fbfcfb');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- The build fills #root with the prerendered page (scripts/prerender.mjs). -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

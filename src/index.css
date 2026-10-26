@@ -1,0 +1,693 @@
+@import 'tailwindcss';
+@import './sections.css';
+
+/* Fonts: Archivo, Inter and JetBrains Mono (Google Fonts, via Fontsource),
+   self-hosted from public/fonts. Each variable font is trimmed with fonttools to
+   the axis ranges this page uses, which roughly halves the download:
+   Archivo weight 700–800 and width 106–118%, Inter and JetBrains Mono weight
+   400–700. Using a weight or width outside those ranges needs a re-trim. */
+@font-face {
+  font-family: 'Archivo Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700 800;
+  font-stretch: 106% 118%;
+  src: url('/fonts/archivo-latin.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Archivo Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700 800;
+  font-stretch: 106% 118%;
+  src: url('/fonts/archivo-latin-ext.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/inter-latin.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/inter-latin-ext.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 700;
+  src: url('/fonts/jetbrains-mono-latin-ext.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF,
+    U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Colours come from Solo Ship Kit's marketing images (kit.css):
+   ink #1d232b, paper #fbfcfb, green #0b6e4f, mint #7fd8b3. */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0f1317;
+  --surface: #161c22;
+  --surface-2: #1d232b;
+  --text: #e8ecef;
+  --muted: #9ba6b2;
+  --rule: #26303a;
+  --rule-strong: #3a4652;
+  --accent: #0b6e4f;
+  --accent-text: #7fd8b3;
+  --on-accent: #ffffff;
+  --spine-track: #1f3a30;
+  --focus: #7fd8b3;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 32px -12px rgb(0 0 0 / 0.55);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #fbfcfb;
+  --surface: #eff3f1;
+  --surface-2: #e5ebe8;
+  --text: #1d232b;
+  --muted: #5b6573;
+  --rule: #d9dee5;
+  --rule-strong: #b9c2cc;
+  --accent: #0b6e4f;
+  --accent-text: #0b6e4f;
+  --on-accent: #ffffff;
+  --spine-track: #b5d4c6;
+  --focus: #0b6e4f;
+  --shadow: 0 1px 2px rgb(29 35 43 / 0.08), 0 12px 32px -14px rgb(29 35 43 / 0.22);
+}
+
+/* The Solo Ship Kit band is kit green in both themes. */
+.band {
+  --band: #0b6e4f;
+  --band-deep: #084d38;
+  --band-text: #fbfcfb;
+  --band-muted: #cfe8dd;
+  --band-rule: rgb(251 252 251 / 0.22);
+  --focus: #fbfcfb;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-band: var(--band);
+  --color-band-deep: var(--band-deep);
+  --color-band-text: var(--band-text);
+  --color-band-muted: var(--band-muted);
+  --color-band-rule: var(--band-rule);
+
+  --font-display: 'Archivo Variable', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* No grey flash on tap; every control has its own :active state instead. */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* No double-tap-zoom wait, so taps fire at once. */
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
+  /* Labels on controls aren't content: a long press shouldn't select them. */
+  button,
+  .btn {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  [id] {
+    scroll-margin-top: 6.5rem;
+  }
+
+  html {
+    scrollbar-color: var(--rule-strong) var(--bg);
+  }
+}
+
+@layer components {
+  /* Archivo, widened: the display voice. */
+  .display {
+    font-family: var(--font-display);
+    font-stretch: 118%;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+  }
+
+  /* Versions, dates, numbers and states. No ligatures, so "->" shows as typed. */
+  .mono {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .container-log {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-left: var(--gutter-l);
+    padding-right: var(--gutter-r);
+  }
+
+  /* The load-time entrance (hero, kit header, spine). It runs in CSS so it
+     plays from the prerendered HTML; --d staggers the pieces. */
+  .rise {
+    animation: rise 400ms var(--ease-out-quint) both;
+    animation-delay: var(--d, 0ms);
+  }
+
+  /* Staggered lists (Stagger in src/components/motion.tsx). Only a list that
+     started below the fold is armed (hidden); revealing it eases each item in
+     50ms after the one before. */
+  [data-reveal] > * {
+    transition:
+      opacity 360ms ease,
+      transform 360ms var(--ease-out-quint);
+    transition-delay: calc(var(--i, 0) * 50ms);
+  }
+
+  [data-reveal='armed'] > * {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 16px));
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes spine-draw {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+/* A value that just changed settles into place (the FSM readout). */
+@keyframes value-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* Switching theme crossfades the page (see src/lib/theme.ts). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+:root {
+  --gutter: clamp(1rem, 4vw, 3rem);
+  /* The side gutters also clear the notch in landscape (viewport-fit=cover). */
+  --gutter-l: max(var(--gutter), env(safe-area-inset-left, 0px));
+  --gutter-r: max(var(--gutter), env(safe-area-inset-right, 0px));
+  /* Distance from the spine to the content beside it. */
+  --spine-gap: clamp(1.5rem, 4vw, 3.5rem);
+  --spine-w: 6px;
+  --header-h: 4.25rem;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --spine-w: 4px;
+  }
+}
+
+/* Reduced motion: nothing moves. Entrances become short fades, and state
+   changes happen at once. Motion's own animations follow MotionConfig. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  .rise {
+    animation: fade-in 200ms ease both;
+  }
+
+  .value-in {
+    animation-name: fade-in;
+  }
+
+  .spine-draw {
+    animation: none;
+  }
+}
+
+/* Printing or saving as PDF: show everything, whatever has or hasn't been revealed. */
+@media print {
+  [data-reveal='armed'] > *,
+  .rise {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .site-header {
+    position: static;
+  }
+
+  .section-menu,
+  .theme-toggle,
+  .menu-button,
+  .skip-link {
+    display: none !important;
+  }
+}
+
+/* ---------- Ledger ---------- */
+@layer components {
+  .log {
+    position: relative;
+  }
+
+  /* The spine: the kit's thick green rule, running down the whole log. */
+  .spine,
+  .band-spine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: max(var(--gutter-l), calc((100% - 78rem) / 2 + var(--gutter-l)));
+    width: var(--spine-w);
+    border-radius: 999px;
+    pointer-events: none;
+  }
+
+  .spine {
+    background: var(--spine-track);
+    z-index: 0;
+  }
+
+  .spine-draw,
+  .spine-fill {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    transform-origin: top;
+  }
+
+  .spine-draw {
+    animation: spine-draw 400ms var(--ease-out-quint) both;
+  }
+
+  .spine-fill {
+    background: var(--spine);
+  }
+
+  .band-spine {
+    background: var(--band-text);
+    border-radius: 0;
+  }
+
+  /* Content beside the spine. */
+  .entry {
+    position: relative;
+    padding-left: calc(var(--spine-w) + var(--spine-gap));
+  }
+
+  /* Title, then the date and status under it, like a log entry. */
+  .entry-head {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .entry-title {
+    position: relative;
+    margin: 0;
+  }
+
+  .entry-title-xl {
+    font-size: clamp(2.75rem, 7vw, 5.5rem);
+  }
+
+  .entry-title-lg {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .entry-title-md {
+    font-size: clamp(1.875rem, 3.4vw, 2.75rem);
+  }
+
+  .entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1rem;
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* The dot stays a dot and sits on the first line when the status wraps. */
+  .status {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .status::before {
+    content: '';
+    flex-shrink: 0;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-top: calc((1lh - 0.5rem) / 2);
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .status-live {
+    color: var(--accent-text);
+  }
+
+  /* A node on the spine, centred on the title's first line. It sits dim on
+     the track until the reading line passes it (.is-lit), then switches on.
+     Filled nodes are things that shipped; hollow ones are the rest. */
+  .spine-node {
+    position: absolute;
+    top: calc(0.49em - 9px);
+    left: calc(-1 * (var(--spine-gap) + var(--spine-w) / 2) - 9px);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow:
+      inset 0 0 0 3px var(--spine-track),
+      0 0 0 5px var(--bg);
+  }
+
+  .spine-node::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0;
+    transform: scale(0.5);
+    transition:
+      opacity 240ms ease,
+      transform 320ms var(--ease-out-quint);
+  }
+
+  .spine-node.is-lit::after {
+    opacity: 1;
+    transform: none;
+  }
+
+  .spine-node-filled::after {
+    background: var(--spine);
+  }
+
+  .spine-node-hollow::after {
+    box-shadow: inset 0 0 0 3px var(--spine);
+  }
+
+  .band .spine-node {
+    background: var(--band);
+    box-shadow:
+      inset 0 0 0 3px var(--band-deep),
+      0 0 0 5px var(--band);
+  }
+
+  .band .spine-node-filled::after {
+    background: var(--band-text);
+  }
+
+  .band .entry-meta {
+    color: var(--band-muted);
+  }
+
+  .band .status-live {
+    color: var(--band-text);
+  }
+
+  /* ---------- Buttons and links ---------- */
+  .btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.25rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.975rem;
+    line-height: 1.25;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 160ms var(--ease-out-quint);
+  }
+
+  /* Hover tint as an overlay, so only opacity animates. */
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 160ms ease;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-arrow {
+    flex: none;
+    width: 1.05em;
+    height: 1.05em;
+    transition: transform 200ms var(--ease-out-quint);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .btn-secondary {
+    color: var(--text);
+    box-shadow: inset 0 0 0 1px var(--rule-strong);
+  }
+
+  .btn-band-primary {
+    background: var(--band-text);
+    color: var(--band-deep);
+  }
+
+  .btn-band-secondary {
+    color: var(--band-text);
+    box-shadow: inset 0 0 0 1px rgb(251 252 251 / 0.5);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: var(--rule-strong);
+  }
+
+  .text-link-arrow {
+    width: 1em;
+    height: 1em;
+    transition: transform 200ms var(--ease-out-quint);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover::after {
+      opacity: 0.09;
+    }
+
+    .btn:hover .btn-arrow {
+      transform: translateX(2px);
+    }
+
+    .btn:hover .btn-arrow-out {
+      transform: translate(2px, -2px);
+    }
+
+    .btn:hover .btn-arrow-out {
+      transform: translate(2px, -2px);
+    }
+
+    .text-link:hover {
+      text-decoration-color: currentColor;
+    }
+
+    .text-link:hover .text-link-arrow {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  /* ---------- Facts and tags ---------- */
+  .fact-list {
+    margin: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .fact-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .fact-row dt {
+    font-size: 0.9375rem;
+    color: var(--muted);
+  }
+
+  .fact-note {
+    display: block;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+
+  .fact-row dd {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    text-align: right;
+    color: var(--text);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags li {
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: var(--surface);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+}
+
+:root,
+:root[data-theme='dark'] {
+  --spine: #12855f;
+}
+
+:root[data-theme='light'] {
+  --spine: #0b6e4f;
+}

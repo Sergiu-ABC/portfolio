@@ -1,0 +1,17 @@
+node_modules
+dist
+*.local
+.DS_Store
+# Secrets
+.env
+.env.*
+
+# Old CV, kept out of the site and the repo
+_private/
+# Impeccable review captures and local session state
+.impeccable/review/
+.impeccable/live/
+.impeccable/questions/
+
+# Playwright MCP output
+.playwright-mcp/
