@@ -4,6 +4,10 @@
 
 ## Platform
 
+### Local review update - 2026-10-29
+
+The owner requested a portfolio-first home page and local preview before any push or deployment. This update supersedes the product-first ordering described below. The home page now leads with projects and the CV; a concise Solo Ship Kit entry links to `/solo-ship-kit/`, which retains the full offer. Both pages are statically prerendered. Availability is summer 2027. Direction screenshots have a native dialog viewer, and the washer walkthrough advances manually. Vitaly examples are documented command/output categories from its public README, not fabricated screenshots or player data. Keep Nexys descriptions technical without adding unconfirmed personal contribution details.
+
 web
 
 ## Stack

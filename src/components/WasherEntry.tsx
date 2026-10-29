@@ -1,60 +1,23 @@
-import { useInView, useReducedMotion } from 'motion/react';
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { washer } from '../content';
 import { ButtonLink, EntryHeader, FactList, Tags } from './ui';
 
-// How long the demo stays on each stage.
-const STEP_MS = 200;
-// The step value for "the program has finished": every stage it runs is done.
-const DONE = Number.POSITIVE_INFINITY;
-
 export function WasherEntry() {
   const [selected, setSelected] = useState(0);
-  const [step, setStep] = useState(DONE);
-  const timer = useRef<number | undefined>(undefined);
-  const stagesRef = useRef<HTMLOListElement>(null);
-  const inView = useInView(stagesRef, { once: true, margin: '0px 0px -25% 0px' });
-  const reduceMotion = useReducedMotion();
+  const [step, setStep] = useState(0);
 
   const program = washer.programs[selected];
   const runs = (optional?: 'prewash' | 'extraRinse') => !optional || program[optional];
   const activeCount = washer.stages.filter((s) => runs(s.optional)).length;
+  const activeStages = washer.stages.filter((s) => runs(s.optional));
+  const finished = step >= activeCount;
   const summary = `Program ${program.id}: ${program.temp} °C, ${program.rpm} rpm${program.prewash ? ', prewash' : ''}${
     program.extraRinse ? ', extra rinse' : ''
   }.`;
 
-  // Steps through the stages the program runs, like the board does.
-  function run(stages: number) {
-    window.clearInterval(timer.current);
-    if (reduceMotion) {
-      setStep(DONE);
-      return;
-    }
-    setStep(0);
-    let current = 0;
-    timer.current = window.setInterval(() => {
-      current += 1;
-      if (current >= stages) {
-        window.clearInterval(timer.current);
-        setStep(DONE);
-      } else {
-        setStep(current);
-      }
-    }, STEP_MS);
-  }
-
-  // The first time the stages scroll into view, run the selected program once.
-  useEffect(() => {
-    if (inView) run(activeCount);
-    // Only on the first appearance; later runs come from the buttons.
-  }, [inView]);
-
-  useEffect(() => () => window.clearInterval(timer.current), []);
-
   function choose(i: number) {
-    const next = washer.programs[i];
     setSelected(i);
-    run(washer.stages.filter((s) => !s.optional || next[s.optional]).length);
+    setStep(0);
   }
 
   // Each stage's state, and how far along the rail the machine has got.
@@ -143,9 +106,19 @@ export function WasherEntry() {
                 </dd>
               </div>
             </dl>
-            <p className="sr-only" aria-live="polite">
-              {summary}
-            </p>
+            <div className="fsm-controls">
+              <p className="fsm-progress" role="status">
+                <span className="mono">{finished ? 'Complete' : `Stage ${step + 1} / ${activeCount}`}</span>
+                <strong>{finished ? 'Program finished' : activeStages[step].label}</strong>
+              </p>
+              <div className="fsm-control-buttons">
+                <button type="button" className="btn btn-secondary" disabled={step === 0} onClick={() => setStep(0)}>Reset</button>
+                <button type="button" className="btn btn-primary" disabled={finished} onClick={() => setStep((s) => Math.min(s + 1, activeCount))}>
+                  {finished ? 'Completed' : step === activeCount - 1 ? 'Finish program' : 'Next stage →'}
+                </button>
+              </div>
+            </div>
+            <p className="sr-only" aria-live="polite">{summary}</p>
 
             {/* The stages as nodes on a rail, like the page's spine: filled when
                 done, ringed where the machine is, dashed when the program skips it. */}
@@ -153,9 +126,9 @@ export function WasherEntry() {
               <span className="fsm-rail" aria-hidden="true">
                 <span className="fsm-rail-fill" style={railProgress} />
               </span>
-              <ol className="fsm-stages" aria-label="Wash stages" ref={stagesRef}>
+              <ol className="fsm-stages" aria-label="Wash stages">
                 {stages.map((stage) => (
-                  <li key={stage.state} className={`fsm-stage ${stage.phase}`}>
+                  <li key={stage.state} className={`fsm-stage ${stage.phase}`} aria-current={stage.phase === 'is-current' ? 'step' : undefined}>
                     <span className="fsm-node" aria-hidden="true" />
                     <span className="fsm-text">
                       <span className="fsm-label">

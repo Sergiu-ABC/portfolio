@@ -75,6 +75,19 @@ export function Tags({ tags, label }: { tags: string[]; label: string }) {
   );
 }
 
+export function EngineeringNotes({ notes }: { notes: { label: string; text: string }[] }) {
+  return (
+    <dl className="engineering-notes">
+      {notes.map((note) => (
+        <div key={note.label}>
+          <dt>{note.label}</dt>
+          <dd>{note.text}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
 type EntryHeaderProps = {
   id: string;
   title: string;

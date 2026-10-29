@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sergiuborca.dev/sitemap.xml
+Sitemap: https://www.sergiuborca.dev/sitemap.xml

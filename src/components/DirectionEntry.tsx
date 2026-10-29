@@ -1,6 +1,6 @@
 import { direction } from '../content';
-import { Stagger, staggerIndex } from './motion';
-import { ButtonLink, EntryHeader, FactList, Tags } from './ui';
+import { ButtonLink, EngineeringNotes, EntryHeader, FactList, Tags } from './ui';
+import { ScreenshotGallery } from './ScreenshotGallery';
 
 export function DirectionEntry() {
   return (
@@ -34,24 +34,8 @@ export function DirectionEntry() {
             </div>
           </div>
 
-          {direction.screens.length > 0 && (
-            <Stagger className="screens" aria-label="Direction screenshots">
-              {direction.screens.map((s, i) => (
-                <li key={s.src} className="screen" style={staggerIndex(i)}>
-                  <img
-                    src={`/images/direction/${s.src}-360.webp`}
-                    srcSet={`/images/direction/${s.src}-360.webp 360w, /images/direction/${s.src}-720.webp 720w`}
-                    sizes="(min-width: 1024px) 180px, 46vw"
-                    width={360}
-                    height={640}
-                    alt={s.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </li>
-              ))}
-            </Stagger>
-          )}
+          <EngineeringNotes notes={direction.engineering} />
+          <ScreenshotGallery screens={direction.screens} />
         </div>
       </div>
     </section>

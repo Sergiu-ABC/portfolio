@@ -3,12 +3,15 @@ import { nav, site } from '../content';
 import { useTheme } from '../lib/theme';
 import { ArrowUpRight, Moon, Sun } from './Icons';
 
-export function SiteHeader() {
+export function SiteHeader({ productPage = false }: { productPage?: boolean }) {
   const { theme, toggle } = useTheme();
   const next = theme === 'dark' ? 'light' : 'dark';
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const menu = useRef<HTMLDivElement>(null);
+  const links = productPage
+    ? [{ label: 'Back to portfolio', href: '/' }, { label: 'Projects', href: '/#direction' }, { label: 'Contact', href: '/#contact' }]
+    : nav;
 
   // The small-screen menu closes on Escape (focus goes back to its button) and
   // on a tap outside it.
@@ -36,14 +39,14 @@ export function SiteHeader() {
     <header className="site-header">
       <div className="container-log flex h-full items-center justify-between gap-3">
         {/* A name too long for the bar truncates; the title shows it in full. */}
-        <a href="#top" className="wordmark display" title={site.name}>
+        <a href={productPage ? '/' : '#top'} className="wordmark display" title={site.name}>
           <span className="hidden sm:inline">{site.name}</span>
           <span className="sm:hidden">{site.shortName}</span>
         </a>
 
         <nav aria-label="Sections" className="flex shrink-0 items-center gap-1">
           <ul className="hidden items-center gap-1 md:flex">
-            {nav.map((item) => (
+            {links.map((item) => (
               <li key={item.href}>
                 <a href={item.href} className="nav-link">
                   {item.label}
@@ -86,7 +89,7 @@ export function SiteHeader() {
 
       <div id="section-menu" ref={menu} className="section-menu md:hidden" data-open={menuOpen} hidden={!menuOpen}>
         <ul className="container-log">
-          {nav.map((item) => (
+          {links.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="section-menu-link" onClick={() => setMenuOpen(false)}>
                 {item.label}

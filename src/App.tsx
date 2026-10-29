@@ -10,7 +10,7 @@ import { SiteHeader } from './components/SiteHeader';
 import { VitalyEntry } from './components/VitalyEntry';
 import { WasherEntry } from './components/WasherEntry';
 
-export default function App() {
+export default function App({ productPage = false }: { productPage?: boolean }) {
   const logRef = useLogRef();
 
   return (
@@ -18,17 +18,23 @@ export default function App() {
       <a href="#main" className="skip-link">
         Skip to content
       </a>
-      <SiteHeader />
+      <SiteHeader productPage={productPage} />
       <main id="main" className="log" ref={logRef}>
-        <Spine target={logRef} />
-        <Hero />
-        <KitBand />
-        <DirectionEntry />
-        <VitalyEntry />
-        <WasherEntry />
-        <Coursework />
-        <About />
-        <Contact />
+        {productPage ? (
+          <div id="top"><KitBand fullPage /></div>
+        ) : (
+          <>
+            <Spine target={logRef} />
+            <Hero />
+            <DirectionEntry />
+            <VitalyEntry />
+            <WasherEntry />
+            <KitBand />
+            <Coursework />
+            <About />
+            <Contact />
+          </>
+        )}
       </main>
       <SiteFooter />
     </>

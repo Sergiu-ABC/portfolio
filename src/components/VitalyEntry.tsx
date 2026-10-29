@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { vitaly } from '../content';
 import { ArrowRight } from './Icons';
-import { ButtonLink, EntryHeader, FactList, Tags } from './ui';
+import { ButtonLink, EngineeringNotes, EntryHeader, FactList, Tags } from './ui';
 
 // Lets a long class name wrap between its words (FaceitApiClient -> Faceit|Api|Client).
 function Breakable({ name }: { name: string }) {
@@ -85,6 +85,21 @@ export function VitalyEntry() {
               </div>
             </div>
           </>
+
+          <EngineeringNotes notes={vitaly.engineering} />
+
+          <div className="lookup-example" aria-labelledby="lookup-title">
+            <div>
+              <h3 id="lookup-title">From lookup to scouting report</h3>
+              <p>The Discord commands and web dashboard expose the same player data.</p>
+            </div>
+            <dl className="lookup-rows">
+              <div><dt><code>!stats &lt;nickname&gt;</code></dt><dd>K/D, average damage, headshot percentage and win rate</dd></div>
+              <div><dt><code>!maps &lt;nickname&gt;</code></dt><dd>Map statistics and auto-veto recommendations</dd></div>
+              <div><dt><code>!compare &lt;a&gt; &lt;b&gt;</code></dt><dd>Head-to-head player comparison</dd></div>
+            </dl>
+            <p className="lookup-note">Documented command examples, not a live player report.</p>
+          </div>
 
           <figure className="flow">
             <div className="flow-grid">

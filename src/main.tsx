@@ -18,7 +18,7 @@ async function start() {
   const root = document.getElementById('root')!;
   const app = (
     <StrictMode>
-      <App />
+      <App productPage={window.location.pathname.startsWith('/solo-ship-kit')} />
     </StrictMode>
   );
 

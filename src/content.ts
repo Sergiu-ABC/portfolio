@@ -15,15 +15,15 @@ export type Fact = { label: string; value: string; note?: string; href?: string 
 export const site = {
   name: 'Sergiu-Andrei Borca',
   shortName: 'Sergiu Borca',
-  url: 'https://sergiuborca.dev',
+  url: 'https://www.sergiuborca.dev',
   title: 'Sergiu-Andrei Borca · Software developer',
   description:
-    'Sergiu-Andrei Borca builds software and ships it as products: Solo Ship Kit, the Direction Flutter app, and Java and FPGA projects. CS student at UTCN, Cluj-Napoca.',
+    'Sergiu-Andrei Borca, Computer Science student at UTCN in Cluj-Napoca. Java back ends, Flutter apps and FPGA projects. Available for summer 2027 software internships.',
   email: 'sergiuborca30b@gmail.com',
   github: 'https://github.com/Sergiu-ABC',
   linkedin: 'https://www.linkedin.com/in/sergiu-borca-519220315/',
   // Set to '' to hide the availability line everywhere.
-  availability: 'Open to software internships',
+  availability: 'Available for summer 2027 internships',
   // The CV link shows only while `show` is true. The file lives in public/.
   cv: { show: true, href: '/Sergiu-Andrei-Borca-CV.pdf', label: 'CV' },
   // Shown in the footer.
@@ -31,8 +31,8 @@ export const site = {
 };
 
 export const nav: Link[] = [
-  { label: 'Solo Ship Kit', href: '#solo-ship-kit' },
   { label: 'Projects', href: '#direction' },
+  { label: 'Solo Ship Kit', href: '/solo-ship-kit/' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -41,10 +41,10 @@ export const hero = {
   headline: ['I build software', 'and ship it as products.'],
   intro:
     'Computer Science student at UTCN in Cluj-Napoca. I build Flutter apps and Java back ends, test them properly and see them through to release.',
-  primary: { label: 'See Solo Ship Kit', href: '#solo-ship-kit' },
-  secondary: { label: 'Get in touch', href: '#contact' },
+  primary: { label: 'View projects', href: '#direction' },
+  secondary: { label: 'Download CV', href: '/Sergiu-Andrei-Borca-CV.pdf' },
   // The short index of the log, shown beside the intro on wide screens.
-  indexTitle: 'Latest in the log',
+  indexTitle: 'Selected work',
 };
 
 export const kit = {
@@ -56,11 +56,16 @@ export const kit = {
   subtitle: 'The Claude Code workflow and guardrails for shipping Flutter apps on your own.',
   forWho:
     'For Flutter and indie developers who already use Claude Code and want to ship without breaking things.',
-  body: 'It’s the workflow I used to build Direction, written down: a prompt format that gets features built right, a guard hook that keeps Claude away from your secrets, and the 9-step loop every feature goes through.',
+  body: 'It’s the workflow I used to build Direction, written down: a structured prompt format, a guard hook that blocks configured secret-access patterns, and a repeatable loop for implementation, testing and review.',
+  summary: 'An independent developer toolkit: a Flutter starter app, reusable Claude Code templates and a documented development workflow. The full kit is in development; the free Prompt Card is available now.',
+  engineering: [
+    'A Dart build pipeline generates documentation, image assets and release archives from one configuration file.',
+    'Release checks flag secrets, signing keys and private files before packaging.',
+  ],
   inside: [
     'A guide to the whole workflow',
     '20+ prompts, ready to fill in',
-    'The drop-in setup: a guard hook that keeps Claude away from secrets, a read-only reviewer agent and four skills',
+    'The drop-in setup: a guard hook for configured secret-access patterns, a read-only reviewer agent and four skills',
     'In Pro: a starter Flutter app wired with all of it',
   ],
   tiers: [
@@ -130,6 +135,10 @@ export const direction = {
     { label: 'Built with', value: 'The Solo Ship Kit workflow', href: '#solo-ship-kit' },
   ] satisfies Fact[],
   tags: ['Flutter', 'Dart', 'Android', 'Web', 'Golden tests'],
+  engineering: [
+    { label: 'Storage decision', text: 'Local storage keeps the app usable offline. Streaks and insights are derived from activity history instead of stored as separate counters.' },
+    { label: 'Testing focus', text: 'Golden tests check screen appearance; fake-clock tests cover midnight, month changes and missed days.' },
+  ],
   screens: [
     {
       src: '01_profile',
@@ -163,6 +172,10 @@ export const vitaly = {
     '29 JUnit tests against an in-process fake API, run in GitHub Actions CI.',
   ],
   commands: ['!stats', '!role', '!maps', '!compare', '!period', '!leaderboard'],
+  engineering: [
+    { label: 'Concurrency decision', text: 'Slow API calls run on a worker pool so Discord interactions can be acknowledged before the result is ready.' },
+    { label: 'Failure handling', text: 'A shared cache reduces API calls. Retries respect Retry-After, while tests exercise failures against a fake upstream API.' },
+  ],
   // The architecture, from the repo's README.
   flow: {
     inputs: [
@@ -201,7 +214,7 @@ export const washer = {
   summary:
     'A manual mode and five automatic programs. The control unit (the state machine) drives an execution unit: timers, heater, door lock, time calculator, 7-segment display and LEDs.',
   demoTitle: 'Pick a program',
-  demoNote: 'The five programs from the board’s ROM. Pick one to step through the stages it runs.',
+  demoNote: 'Choose a program from the board’s ROM, then advance one stage at a time. Optional stages are skipped automatically.',
   statesNote:
     'The FSM has 12 states: these 8 wash stages, plus inactive, manual_mode, auto_mode and calc_time before a wash starts.',
   // From AUTO_ROM.vhd.
@@ -258,7 +271,7 @@ export const about = {
   title: 'About',
   paragraphs: [
     'I’m Sergiu, a Computer Science student at the Technical University of Cluj-Napoca. I like taking a project all the way: the tests, the store listing, the page that explains it.',
-    'Direction showed me that a good test suite is what lets one person keep shipping, and Solo Ship Kit is that workflow, written down for other developers. Next, I’m looking for a software internship where I can do the same on a team.',
+    'My projects span Flutter apps, Java services and an FPGA controller. I’m looking for a summer 2027 software internship to contribute to an engineering team and learn from experienced developers.',
   ],
   stackTitle: 'Stack',
   stack: ['Java', 'C', 'C++', 'SQL / PostgreSQL', 'Flutter / Dart', 'PHP', 'HTML / CSS', 'VHDL'],
@@ -278,11 +291,11 @@ export const footer = {
   backToTop: 'Back to top',
 };
 
-// The log's index in the hero lists these, newest first.
+// The index follows the portfolio's project order.
 // Each row carries one number from the entry, so the proof shows in the first screen.
 export const logIndex = [
-  { date: kit.date, name: kit.title, status: kit.status, proof: 'Free Prompt Card', href: `#${kit.id}` },
   { date: direction.date, name: direction.title, status: direction.status, proof: '384 tests', href: `#${direction.id}` },
   { date: vitaly.date, name: vitaly.title, status: vitaly.status, proof: '29 tests, CI', href: `#${vitaly.id}` },
   { date: washer.date, name: washer.title, status: washer.status, proof: '12-state FSM', href: `#${washer.id}` },
+  { date: kit.date, name: kit.title, status: kit.status, proof: 'Developer toolkit', href: `#${kit.id}` },
 ];

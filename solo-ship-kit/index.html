@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Solo Ship Kit · Flutter development workflow</title>
+    <meta
+      name="description"
+      content="Solo Ship Kit: a documented Flutter development workflow, reusable Claude Code templates and a starter app. Get the free Prompt Card or explore the full kit."
+    />
+    <meta name="author" content="Sergiu-Andrei Borca" />
+    <link rel="canonical" href="https://www.sergiuborca.dev/solo-ship-kit/" />
+    <meta name="theme-color" content="#0f1317" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- The two fonts the first screen is set in. -->
+    <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sergiu-Andrei Borca" />
+    <meta property="og:title" content="Solo Ship Kit · Flutter development workflow" />
+    <meta
+      property="og:description"
+      content="A documented Flutter development workflow, reusable Claude Code templates and a starter app. Free Prompt Card available now."
+    />
+    <meta property="og:url" content="https://www.sergiuborca.dev/solo-ship-kit/" />
+    <meta property="og:image" content="https://www.sergiuborca.dev/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Sergiu-Andrei Borca: I build software and ship it as products."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Solo Ship Kit · Flutter development workflow" />
+    <meta
+      name="twitter:description"
+      content="A documented Flutter development workflow, reusable Claude Code templates and a starter app. Free Prompt Card available now."
+    />
+    <meta name="twitter:image" content="https://www.sergiuborca.dev/og.png" />
+
+    <!-- Set the theme before the first paint: dark unless the visitor chose light. -->
+    <script>
+      (function () {
+        var theme = 'dark';
+        try {
+          if (localStorage.getItem('theme') === 'light') theme = 'light';
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'light') {
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', '#fbfcfb');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- The build fills #root with the prerendered page (scripts/prerender.mjs). -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

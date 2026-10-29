@@ -33,10 +33,11 @@ export function Hero() {
               )}
               <div className="hero-actions">
                 <ButtonLink href={hero.primary.href}>{hero.primary.label}</ButtonLink>
-                <ButtonLink href={hero.secondary.href} variant="secondary">
+                <ButtonLink href={hero.secondary.href} variant="secondary" external>
                   {hero.secondary.label}
                 </ButtonLink>
               </div>
+              <a href="#contact" className="hero-contact">Get in touch →</a>
             </div>
 
             {logIndex.length > 0 && (
